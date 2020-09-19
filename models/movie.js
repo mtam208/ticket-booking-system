@@ -14,7 +14,7 @@ const movieSchema = new Schema(
         genre: {type: String},
         openDate: {type: Date},
         summary: {type: String},
-        poster: {type: Image},
+        poster: {type: String},
         trailer: {type: String},
     }
 )
