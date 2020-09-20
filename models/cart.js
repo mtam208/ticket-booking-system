@@ -8,6 +8,9 @@ const cartSchema = new Schema(
         sessionId: {type: Schema.Types.ObjectId, ref: 'Session', required: true},
         seatSelected: {type: [seatSelectedSchema], required: true},
         snack: {type: [snackSchema]}
+    },
+    {
+        collection: 'cart'
     }
 )
 

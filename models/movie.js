@@ -10,15 +10,19 @@ const movieSchema = new Schema(
         length: {type: Number},
         country: {type: String},
         actor: {type: String},
-        proceducer: {type: String},
+        director: {type: String},
+        producer: {type: String},
         genre: {type: String},
         openDate: {type: Date},
         summary: {type: String},
         poster: {type: String},
         trailer: {type: String},
+    },
+    {
+        collection: 'movie'
     }
 )
 
-const MovieModel = mongoose.model('movie', movieSchema)
+const MovieModel = mongoose.model('movies', movieSchema)
 
 module.exports = MovieModel

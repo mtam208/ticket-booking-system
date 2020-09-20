@@ -29,7 +29,11 @@ const sessionSchema = new Schema({
         [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ]
     ],
     snack: {type: Schema.Types.ObjectId, ref: 'Cart'}
-});
+    },
+    {
+        collection: 'cart'
+    }
+);
 
 const SessionModel = mongoose.model('session', sessionSchema)
 
