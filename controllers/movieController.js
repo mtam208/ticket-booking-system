@@ -5,11 +5,23 @@ exports.homepage = (req, res, next) => {
 }
 
 exports.showingList = (req, res, next) => {
+    let today = new Date()
     MovieModel.find({
-        _id: '5f66c766fb00db33d58d6ead'
+        openDate: {$lte: today}
     })
     .then(data=>{
-        console.log(data[0].title);
+        res.json(data);
+    })
+    .catch(err=>console.log(err))
+}
+
+exports.upcomingList = (req, res, next) => {
+    let today = new Date()
+    MovieModel.find({
+        openDate: {$gt: today}
+    })
+    .then(data=>{
+        res.json(data);
     })
     .catch(err=>console.log(err))
 }

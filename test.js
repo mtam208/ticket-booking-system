@@ -487,6 +487,6 @@
 // })
 
 // console.log(JSON.stringify(movies));
-
-let d = new Date()
-console.log(d);
+let openDate = '2021-02-12T00:00:00.000Z'
+let d = new Date(openDate)
+console.log(d instanceof Date);

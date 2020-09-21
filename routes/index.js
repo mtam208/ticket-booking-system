@@ -9,8 +9,8 @@ router.get('/', movieController.homepage);
 /* GET list of showing movies */
 router.get('/movie/showing', movieController.showingList);
 
-// /* GET list of upcoming movies */
-// router.get('/movie/upcoming', movieController.upcomingList);
+/* GET list of upcoming movies */
+router.get('/movie/upcoming', movieController.upcomingList);
 
 // /* GET movie info page */
 // router.get('/movie/:id', movieController.movieInfo);

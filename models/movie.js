@@ -13,7 +13,7 @@ const movieSchema = new Schema(
         director: {type: String},
         producer: {type: String},
         genre: {type: String},
-        openDate: {type: String},
+        openDate: {type: Date},
         summary: {type: String},
         poster: {type: String},
         trailer: {type: String},
