@@ -33,7 +33,7 @@ $(document).ready(function () {
               return item.title.toLowerCase().indexOf(keyQ.toLowerCase()) > -1;
             })
             $('.namequery').html('');
-            for (i of result) { $('.namequery').append(`<div><img style="width:30px"src="${i.poster}"><a href="/index/films/${i._id}">${i.title}<a/></div>`) }
+            for (i of result) { $('.namequery').append(`<div><img style="width:30px"src="${i.poster}"><a href="/show/films/${i._id}">${i.title}<a/></div>`) }
           });
         })
 })
