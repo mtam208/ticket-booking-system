@@ -3,8 +3,14 @@ var router = express.Router();
 var User = require('../models/user')
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
+const GoogleStrategy = require('passport-google-oauth20').Strategy;
 var jwt = require('jsonwebtoken');
-var session = require('express-session')
+var session = require('express-session');
+const bcrypt = require('bcrypt');
+
+router.get('/', function (req, res) {
+  res.render('auth')
+})
 
 router.get('/login', function (req, res, next) {
   res.render('login');
@@ -18,7 +24,6 @@ passport.use(new LocalStrategy(
     })
       .then(data => {
         bcrypt.compare(password, data.password, (err, same) => {
-          console.log(same);
           if (same) { return done(null,data)} else {return done(null, false)}
         })
       })
@@ -38,36 +43,96 @@ router.post('/login', function(req, res, next) {
   })(req, res, next);
 });
 
+// PASSPORT GOOGLE
+
+router.use(passport.initialize());
+router.use(passport.session());
+
+passport.serializeUser(function (user, done) {
+  var token = jwt.sign(user.id, 'mk');
+  done(null, user.id);
+});
+
+passport.deserializeUser(function(id, done) {
+  User.findById(id, function(err, user) {
+    done(err, user);
+  });
+});
+
+passport.use(
+  new GoogleStrategy(
+      {
+        clientID:
+      '425336740930-h9n8jfr30vfjl3oknf1a5nb7pvdhj8n8.apps.googleusercontent.com',
+        clientSecret: 'gUedMMxR9o2osHsQD8HuW6cp',
+        callbackURL: 'http://localhost:3000/auth/google/callback',
+      },
+    function (accessToken, refreshToken, profile, cb) {
+        User.findOne({
+          googleid: profile.id,
+        })
+          .then((data) => {
+              if (data) {
+                cb(null, data);
+              } else {
+                User.create({
+                  googleid: profile.id,
+                  email: profile._json.email,
+                  avatar: profile._json.picture
+                }).then((data) => {
+                  cb(null, data);
+                });
+              }
+            })
+            .catch((err) => {
+              cb(err);
+            });
+      },
+  ),
+);
+
+router.get(
+  '/google',
+  passport.authenticate('google', {scope: ['profile', 'email']}),
+);
+
+router.get(
+  '/google/callback',
+  passport.authenticate('google', {failureRedirect: '/'}),
+  function(req, res) {
+    res.redirect('/');
+  },
+);
+
 // Log Out
 router.get('/logout', function (req, res) {
-    req.session.destroy();
-    res.redirect('/user')
+  req.session.destroy();
+  res.redirect('/auth')
 })
-  
+
 // SIGNUP
 router.get('/register', function (req, res) {
-    res.render('signup')
+  res.render('signup')
 })
 
 router.post('/register', function (req, res) {
-    let username = req.body.username;
-    let email = req.body.email;
-    let CheckAccount = true;
-    User.find()
-        .then(data => {
-            for (i of data) { 
-                if (username === i.username||email==i.email) { CheckAccount = false; break;}
-            }
-            if (!CheckAccount) {res.json(CheckAccount);} else {
-            User.create(req.body)
-            .then(data => {
-                res.json(CheckAccount);
-            })
-            .catch(err => {
-            res.json(err)
-        })}
-        })
-    
+  let username = req.body.username;
+  let email = req.body.email;
+  let CheckAccount = true;
+  User.find()
+      .then(data => {
+          for (i of data) { 
+              if (username === i.username||email==i.email) { CheckAccount = false; break;}
+          }
+          if (!CheckAccount) {res.json(CheckAccount);} else {
+          User.create(req.body)
+          .then(data => {
+              res.json(CheckAccount);
+          })
+          .catch(err => {
+          res.json(err)
+      })}
+    }) 
 })
 
 // /* GET user info and booking history. */
