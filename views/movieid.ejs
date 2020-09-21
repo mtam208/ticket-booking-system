@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include('layout/header') -%>
+<link rel="stylesheet" href="/stylesheets/show.css">
+
+<body>
+
+  <%- include('layout/navbar') -%>
+
+  <div class="grid wide">
+    <div class="row">
+      <div class="content">
+        <div class="main flex">
+          <div><img class="main__img" src=<%=data.poster%> alt=""></div>
+          <div class="main_right">
+            <ul>
+              <li class="main_right_lists--review flex"><span class="main_right_lists_left">Tên
+                  phim</span><span class="main_right_lists_right"><%=data.title%></span>
+              </li>
+              <li class="main_right_lists flex"><span class="main_right_lists_left">Rating</span><span
+                  class="main_right_lists_right"><%=data.rating%></span>
+              </li>
+              <li class="main_right_lists flex"><span class="main_right_lists_left">Thời
+                  lượng</span><span class="main_right_lists_right"><%=data.length%></span>
+              </li>
+              <li class="main_right_lists flex"><span class="main_right_lists_left">Quốc
+                  Gia</span><span class="main_right_lists_right"><%=data.country%></span>
+              </li>
+              <li class="main_right_lists flex"><span class="main_right_lists_left">Nhà sản
+                  xuất</span><span class="main_right_lists_right"><%=data.producer%></span>
+              </li>
+              <li class="main_right_lists flex"><span class="main_right_lists_left">Thể
+                  loại</span><span class="main_right_lists_right"><%=data.genre%></span>
+              </li>
+              <li class="main_right_lists flex"><span class="main_right_lists_left">Đạo
+                  diễn</span><span class="main_right_lists_right"><%=data.director%></span>
+              </li>
+              <li class="main_right_lists flex"><span class="main_right_lists_left">Diễn
+                  viên</span><span class="main_right_lists_right"><%=data.actor%></span>
+              </li>
+              <li class="main_right_lists flex"><span class="main_right_lists_left">Ngày khởi
+                  chiếu</span><span class="main_right_lists_right"><%=data.openDate%></span>
+              </li>
+              <li class="main_right_lists--review flex"><span class="main_right_lists_left">Tóm
+                  tắt</span><span class="main_right_lists_right"><%=data.summary%></span>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="video-container"><iframe src=<%=data.trailer%>>div
+          </iframe></div>
+      </div>
+    </div>
+  </div>
+  <%- include('layout/footer') -%>
+  <%- include('layout/script') -%>
+
+</body>
+
+</html>
