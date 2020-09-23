@@ -76,10 +76,11 @@ passport.use(
                 cb(null, data);
               } else {
                 User.create({
-                  googleid: profile.id,
                   email: profile._json.email,
+                  googleid: profile.id,
                   avatar: profile._json.picture
                 }).then((data) => {
+                  console.log('--------',data);
                   cb(null, data);
                 });
               }
