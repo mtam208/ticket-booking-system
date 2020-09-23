@@ -8,8 +8,7 @@ const userSchema = new Schema({
     username: {type: String},
     password: {type: String},
     googleid: { type: String },
-    avatar: {type: String},
-    phone: { type: String}
+    avatar: {type: String}
     },
     {
         collection: 'user'
