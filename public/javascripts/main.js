@@ -16,7 +16,7 @@ anchorList.forEach(link => {
         let destination = document.querySelector(this.hash); 
     
         // Scroll to the destination using scrollIntoView method 
-        destination.scrollIntoView({behavior: 'smooth'}); 
+        destination.scrollIntoView({behavior: 'smooth', block: 'center'}); 
     } 
 }); 
 /* SrollIntoView method - END here*/
@@ -24,7 +24,7 @@ anchorList.forEach(link => {
 
 /* Movie Select Box - START here */
 
-// Select Movie
+// Search Movies
 
 $(document).ready(()=>{
     $.ajax({
@@ -32,9 +32,41 @@ $(document).ready(()=>{
         type: 'GET'
     })
     .then(data=>{
+        // Insert movie list to Movie Select Box
         data.forEach(movie => {
             let movieItem = $(`<option class="val" value="${movie._id}">${movie.title}</option>`)
             $('#movieSelection').append(movieItem)
+        })
+
+        // Insert movie list to PHIM DANG CHIEU Section
+        data.slice(0,6).forEach(movie => {
+            let movieItem = $(`
+                <div class="col-sm-4 col-6">
+                    <img src=${movie.poster} class="img-fluid py-2" alt="poster">
+                    <h6>${movie.title}</h6>
+                    <h6>${movie.title_local}</h6>
+                </div>
+            `)
+            $('#showing div.row').append(movieItem)
+        })
+    })
+    .catch(err=>console.log(err))
+
+    // Insert movie list to PHIM SAP CHIEU Section
+    $.ajax({
+        url: '/movie/upcoming',
+        type: 'GET'
+    })
+    .then(data=>{
+        data.slice(0,6).forEach(movie => {
+            let movieItem = $(`
+                <div class="col-sm-4 col-6">
+                    <img src=${movie.poster} class="img-fluid py-2" alt="poster">
+                    <h6>${movie.title}</h6>
+                    <h6>${movie.title_local}</h6>
+                </div>
+            `)
+            $('#upcoming div.row').append(movieItem)
         })
     })
     .catch(err=>console.log(err))
@@ -102,3 +134,13 @@ $('#showDateSelection').change(()=>{
     })
     .catch(err=>console.log(err))
 })
+
+/* Movie Select Box - END here*/
+/* =========================================================================*/
+
+/* Movie Section - START here*/
+
+
+
+/* Movie Section - END here*/
+/* =========================================================================*/

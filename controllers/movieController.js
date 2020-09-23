@@ -10,6 +10,7 @@ exports.showingList = (req, res, next) => {
     MovieModel.find({
         openDate: {$lte: today}
     })
+    .sort({openDate: -1})
     .then(data=>{
         res.json(data);
     })
@@ -21,6 +22,7 @@ exports.upcomingList = (req, res, next) => {
     MovieModel.find({
         openDate: {$gt: today}
     })
+    .sort({openDate: 1})
     .then(data=>{
         res.json(data);
     })
