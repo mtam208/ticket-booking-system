@@ -1,5 +1,5 @@
 const MovieModel = require('../models/movie')
-const SessModel = require('../models/sess')
+const SessionModel = require('../models/sess')
 
 exports.homepage = (req, res, next) => {
     res.render('index')
@@ -36,7 +36,7 @@ exports.movieInfo = (req, res, next) => {
 }
 
 exports.cinemaList = (req, res, next) => {
-    SessModel.find({
+    SessionModel.find({
         movie: req.params.movieId
     })
     .then(data=>{
@@ -48,7 +48,7 @@ exports.cinemaList = (req, res, next) => {
 }
 
 exports.showDateList = (req, res, next) => {
-    SessModel.find({
+    SessionModel.find({
         movie: req.params.movieId,
         cinema: decodeURI(req.params.cinemaId)
     })
@@ -62,7 +62,7 @@ exports.showDateList = (req, res, next) => {
 
 exports.showTimeList = (req, res, next) => {
     console.log(req.params.showDateId);
-    SessModel.find({
+    SessionModel.find({
         movie: req.params.movieId,
         cinema: decodeURI(req.params.cinemaId),
         showDate: req.params.showDateId

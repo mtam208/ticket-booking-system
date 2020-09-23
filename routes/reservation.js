@@ -1,6 +1,6 @@
 const express = require('express');
 var router = express.Router();
-var models=require('../models/Sess')
+var models=require('../models/sess')
 
 router.get('/:id/index', function (req, res) {
     res.render('reservation');
