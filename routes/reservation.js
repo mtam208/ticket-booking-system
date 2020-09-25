@@ -22,8 +22,6 @@ router.post('/:id', function (req, res) {
         _id:req.params.id
     })
         .then(data => {
-            console.log(pos);
-            console.log(data.seat[pos[1].x][pos[1].y]);
             for (let i = 0; i < pos.length; i++) {
                 if (data.seat[pos[i].x][pos[i].y] == 1) { res.json('PICKED'); return false}
             }

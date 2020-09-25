@@ -8,8 +8,14 @@ $(document).ready(function () {
         type: 'GET'
     })
           .then(data => {
+              console.log(data);
               var seat = data.seat;
               var pos = [];
+              $('#movie').append(`${data.movie}`);
+              $('#cinema').append(`${data.cinema}`);
+              $('#hall').append(`${data.hall}`);
+              $('#showDate').append(`${data.showDate}`);
+              $('#showTime').append(`${data.showTime}`);
             // Render seat are selected or not
                 for (let i = 0; i <= 5; i++){
                     for (let j = 0; j <= 8; j++){
@@ -29,13 +35,13 @@ $(document).ready(function () {
                     $(this).removeClass('occupied');
                     seat[x][y] = 0;
                     count--;
-                    loaddata(count, data.price)
+                    loaddata(count, 45000)
                     pos.splice(pos.indexOf({ x: x, y: y }), 1);
                 } else {
                     $(this).addClass('occupied');
                     seat[x][y] = 1;
                     count++;
-                    loaddata(count, data.price);
+                    loaddata(count, 45000);
                     pos.push({ x: x, y: y });
                 }
             })
