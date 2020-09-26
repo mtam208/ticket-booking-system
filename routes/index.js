@@ -3,8 +3,11 @@ var router = express.Router();
 
 const movieController = require('../controllers/movieController')
 
-/* GET home page. */
+/* GET home page */
 router.get('/', movieController.homepage);
+
+/* GET all movies page */
+router.get('/movie', movieController.movie);
 
 /* GET list of showing movies */
 router.get('/movie/showing', movieController.showingList);

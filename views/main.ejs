@@ -40,19 +40,19 @@
   <!-- Movie Section - Start Here -->
   <div class="container text-center my-5"  id="movie-block">
     <ul class="nav nav-pills">
-      <li class="nav-item"><a class="nav-link active h4" data-toggle="pill" href=#showing>PHIM ĐANG CHIẾU</a></li>
-      <li class="nav-item"><a class="nav-link h4" data-toggle="pill" href="#upcoming">PHIM SẮP CHIẾU</a></li>
+      <li class="nav-item"><a class="nav-link active" data-toggle="pill" href=#showing>PHIM ĐANG CHIẾU</a></li>
+      <li class="nav-item"><a class="nav-link" data-toggle="pill" href="#upcoming">PHIM SẮP CHIẾU</a></li>
     </ul>
     <div class="tab-content">
       <div id="showing" class="tab-pane fade in active show">
         <div class="row">
         </div>
-        <button type="button" class="d-inline-block btn btn-info" id="more-showing">Xem thêm</button>
+        <a href="/movie" class="d-inline-block btn btn-info">Xem thêm</a>
       </div>
       <div id="upcoming" class="tab-pane fade">
         <div class="row">
         </div>
-        <button type="button" class="d-inline-block btn btn-info" id="more-upcoming">Xem thêm</button>
+        <a href="/movie" class="d-inline-block btn btn-info">Xem thêm</a>
       </div>
     </div>
   </div>
@@ -121,7 +121,7 @@
   <!-- News Section - End Here -->
   <%- include('layout/footer') -%>
   <%- include('layout/script') -%>
-
+  <script src="/javascripts/main.js"></script>
 </body>
 
 </html>

@@ -1,27 +1,3 @@
-/* SrollIntoView method - START here */
-
-// Define selector for selecting anchor links with the hash 
-let anchorSelector = 'a[href^="#"]'; 
-
-// Collect all such anchor links 
-let anchorList = document.querySelectorAll(anchorSelector); 
-    
-// Iterate through each of the links 
-anchorList.forEach(link => { 
-    link.onclick = function (e) { 
-        // Prevent scrolling if the hash value is blank 
-        e.preventDefault(); 
-    
-        // Get the destination to scroll to using the hash property 
-        let destination = document.querySelector(this.hash); 
-    
-        // Scroll to the destination using scrollIntoView method 
-        destination.scrollIntoView({behavior: 'smooth', block: 'center'}); 
-    } 
-}); 
-/* SrollIntoView method - END here*/
-/* =========================================================================*/
-
 /* Movie Select Box - START here */
 
 // Search Movies
@@ -42,7 +18,9 @@ $(document).ready(()=>{
         data.slice(0,6).forEach(movie => {
             let movieItem = $(`
                 <div class="col-sm-4 col-6">
-                    <img src=${movie.poster} class="img-fluid py-2" alt="poster">
+                    <a href="/movie/${movie._id}" class="stretched-link">
+                        <img src=${movie.poster} class="img-fluid py-2" alt="poster">
+                    </a>
                     <h6>${movie.title}</h6>
                     <h6>${movie.title_local}</h6>
                 </div>
@@ -61,7 +39,9 @@ $(document).ready(()=>{
         data.slice(0,6).forEach(movie => {
             let movieItem = $(`
                 <div class="col-sm-4 col-6">
-                    <img src=${movie.poster} class="img-fluid py-2" alt="poster">
+                    <a href="/movie/${movie._id}" class="stretched-link">
+                        <img src=${movie.poster} class="img-fluid py-2" alt="poster">
+                    </a>
                     <h6>${movie.title}</h6>
                     <h6>${movie.title_local}</h6>
                 </div>
@@ -138,9 +118,3 @@ $('#showDateSelection').change(()=>{
 /* Movie Select Box - END here*/
 /* =========================================================================*/
 
-/* Movie Section - START here*/
-
-
-
-/* Movie Section - END here*/
-/* =========================================================================*/

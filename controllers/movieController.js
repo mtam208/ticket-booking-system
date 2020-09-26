@@ -1,10 +1,26 @@
 const MovieModel = require('../models/movie')
 const SessionModel = require('../models/sess')
 
+/* GET home page */
 exports.homepage = (req, res, next) => {
-    res.render('index')
+    res.render('main')
 }
 
+/* GET all movies' page */
+exports.movie = (req, res, next) => {
+    res.render('movie_all')
+}
+
+/* GET a specific movie's page */
+exports.movieInfo = (req, res, next) => {
+    MovieModel.findById(req.params.id)
+    .then(data=>{
+        res.render('movie', {data: data})
+    })
+    .catch(err=>console.log(err))
+}
+
+/* GET list of showing movies */
 exports.showingList = (req, res, next) => {
     let today = new Date()
     MovieModel.find({
@@ -17,6 +33,7 @@ exports.showingList = (req, res, next) => {
     .catch(err=>console.log(err))
 }
 
+/* GET list of upcoming movies */
 exports.upcomingList = (req, res, next) => {
     let today = new Date()
     MovieModel.find({
@@ -29,14 +46,7 @@ exports.upcomingList = (req, res, next) => {
     .catch(err=>console.log(err))
 }
 
-exports.movieInfo = (req, res, next) => {
-    MovieModel.findById(req.params.id)
-    .then(data=>{
-        res.json(data)
-    })
-    .catch(err=>console.log(err))
-}
-
+/* GET list of cinemas showing selected movie */
 exports.cinemaList = (req, res, next) => {
     SessionModel.find({
         movie: req.params.movieId
@@ -49,6 +59,7 @@ exports.cinemaList = (req, res, next) => {
     .catch(err=>console.log(err))
 }
 
+/* GET list of showDate which selected cinema has */
 exports.showDateList = (req, res, next) => {
     SessionModel.find({
         movie: req.params.movieId,
@@ -62,6 +73,7 @@ exports.showDateList = (req, res, next) => {
     .catch(err=>console.log(err))
 }
 
+/* GET list of showTime which selected showDate has */
 exports.showTimeList = (req, res, next) => {
     console.log(req.params.showDateId);
     SessionModel.find({
