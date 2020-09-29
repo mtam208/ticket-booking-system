@@ -40,6 +40,7 @@ router.post('/login', function(req, res, next) {
     if (err) { console.log(err); return res.json('Fail') }
     if (!user) { return res.json('Fail') }
     var token = jwt.sign(user.id, 'mk');
+    req.user = user.username;
     req.session.token = token;
     return res.json(token)
   })(req, res, next);
@@ -82,7 +83,6 @@ passport.use(
                   googleid: profile.id,
                   avatar: profile._json.picture
                 }).then((data) => {
-                  console.log('--------',data);
                   cb(null, data);
                 });
               }
