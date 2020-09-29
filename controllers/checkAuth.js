@@ -2,35 +2,18 @@ var jwt = require('jsonwebtoken');
 var User = require('../models/user')
 
 module.exports = function (req, res, next) {
-  try {
-    let result = req.user._id;
-    console.log(result);
-    User.findOne({
-      _id:result,
-    })
-      .then(data => {
-        console.log(data);
-        if (!data) {res.json('KHONG HOP LE')}
-        req.user = data.username;
-        return next(); 
-      })
-      .catch(err => {
-        return res.json(err)
-      })
-  } catch (error) {
-    return res.json(error)
-  }
-
   var token = req.session.token;
-  if (token == undefined) { return res.json('KHONG HOP LE') };
+  if (token == undefined&&req.user==undefined) {return res.json('KHONG HOP LE') };
   try {
-    var result = jwt.verify(token, 'mk');
+    if (token==undefined) { result = req.user._id} else {
+    var result = jwt.verify(token, 'mk')};
     User.findOne({
       _id:result,
     })
       .then(data => {
-        if (!data) {res.json('KHONG HOP LE')}
-        req.user = data.username;
+        if (!data) { res.json('KHONG HOP LE') };
+        if (data.username == null) { req.user = data.email }
+        else {req.user = data.username};
         next(); 
       })
       .catch(err => {
