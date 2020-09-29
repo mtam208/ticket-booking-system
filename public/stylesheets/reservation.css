@@ -181,3 +181,7 @@ p.text span {
     margin-left: 0px;
   }
 }
+
+.btn{
+  background:rgba(255, 255, 255, 0.473);
+}

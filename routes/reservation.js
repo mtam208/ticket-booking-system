@@ -25,6 +25,7 @@ router.post('/:id', function (req, res) {
             for (let i = 0; i < pos.length; i++) {
                 if (data.seat[pos[i].x][pos[i].y] == 1) { res.json('PICKED'); return false}
             }
+            
             models.updateOne({
                 _id:req.params.id
             },{seat:seat})
