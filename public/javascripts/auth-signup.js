@@ -2,12 +2,10 @@ $('.btn_login').click(function () {
     var username = $('#username').val();
     var password = $('#password').val();
     var email = $('#userEmail').val();
-    // var mobile = $('#userMobile').val();
     
     $('.alert_username').text('');
     $('.alert_password').text('');
     $('.alert_email').text('');
-    // $('.alert_mobile').text('');
     
         if (username == "") {
             $('.alert_username').text('PLEASE INPUT YOUR USERNAME');
@@ -25,11 +23,7 @@ $('.btn_login').click(function () {
             $('.alert_email').text('PLEASE INPUT YOUR EMAIL');
             return false;
         }
-        // if (mobile == "") {
-        //     $('.alert_mobile').text('PLEASE INPUT YOUR MOBILE');
-        //     return false;
-        // }
- 
+
     $.ajax({
             url: '/auth/register',
             type: 'POST',
@@ -47,7 +41,7 @@ $('.btn_login').click(function () {
                         text: "SIGNUP SUCCESSFUL",
                         type: "success"
                     }, function() {
-                      window.location.href ='/show';
+                      window.location.href ='/auth/login';
                     });
                 }, 100);}
         })

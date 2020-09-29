@@ -15,7 +15,7 @@ $('.btn_login').click(function () {
   // POST DATA
   
     $.ajax({
-      url: '/auth//login',
+      url: '/auth/login',
       type: "POST",
       data: {
         username: username,

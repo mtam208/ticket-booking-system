@@ -7,6 +7,7 @@ const GoogleStrategy = require('passport-google-oauth20').Strategy;
 var jwt = require('jsonwebtoken');
 var session = require('express-session');
 const bcrypt = require('bcrypt');
+var checkAuth = require('../controllers/checkAuth')
 
 router.get('/', function (req, res) {
   res.render('auth')
@@ -23,6 +24,7 @@ passport.use(new LocalStrategy(
         // password: password,
     })
       .then(data => {
+        if (!data) { return done(null, false)}
         bcrypt.compare(password, data.password, (err, same) => {
           if (same) { return done(null,data)} else {return done(null, false)}
         })
@@ -35,7 +37,7 @@ passport.use(new LocalStrategy(
 
 router.post('/login', function(req, res, next) {
   passport.authenticate('local', function(err, user) {
-    if (err) { return res.json(err) }
+    if (err) { console.log(err); return res.json('Fail') }
     if (!user) { return res.json('Fail') }
     var token = jwt.sign(user.id, 'mk');
     req.session.token = token;
@@ -104,7 +106,10 @@ router.get(
     res.redirect('/');
   },
 );
-
+// 
+router.get('/userinfo', checkAuth, function (req, res) {
+  res.json(req.user);
+})
 // Log Out
 router.get('/logout', function (req, res) {
   req.session.destroy();
@@ -135,20 +140,5 @@ router.post('/register', function (req, res) {
       })}
     }) 
 })
-
-// /* GET user info and booking history. */
-// router.get('/:id', userController.userInfo);
-
-// /* POST user login */
-// router.post('/login', userController.userLogin);
-
-// /* POST user register */
-// router.post('/register', userController.userRegister);
-
-// /* POST user logout */
-// router.post('/logout', userController.userLogout);
-
-// /* PATCH user change password */
-// router.patch('/change-pwd', userController.userChangePwd);
 
 module.exports = router;
