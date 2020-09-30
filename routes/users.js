@@ -52,7 +52,6 @@ router.use(passport.initialize());
 router.use(passport.session());
 
 passport.serializeUser(function (user, done) {
-  var token = jwt.sign(user.id, 'mk');
   done(null, user.id);
 });
 

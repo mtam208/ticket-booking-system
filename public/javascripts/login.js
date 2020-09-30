@@ -31,7 +31,7 @@ $('.btn_login').click(function () {
                 text: "LOGIN SUCCESSFUL",
                 type: "success"
             }, function() {
-              window.location.href ='/show';
+              window.location.href ='/movie';
             });
         }, 100);
         }
