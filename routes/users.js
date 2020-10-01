@@ -1,20 +1,20 @@
 var express = require('express');
 var router = express.Router();
-var User = require('../models/user')
+var User = require('../models/user');
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 var jwt = require('jsonwebtoken');
 var session = require('express-session');
 const bcrypt = require('bcrypt');
-var checkAuth = require('../controllers/checkAuth')
+var checkAuth = require('../controllers/checkAuth');
 
 router.get('/', function (req, res) {
-  res.render('auth')
+  res.render('auth', { user: req.user })
 })
 
 router.get('/login', function (req, res, next) {
-  res.render('login');
+  res.render('login', { user: req.user });
 });
 
 passport.use(new LocalStrategy(

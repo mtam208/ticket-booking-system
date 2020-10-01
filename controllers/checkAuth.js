@@ -3,10 +3,12 @@ var User = require('../models/user')
 
 module.exports = function (req, res, next) {
   var token = req.session.token;
-  if (token == undefined&&req.user==undefined) {return res.json('KHONG HOP LE') };
+  if (token == undefined&&req.session.passport==undefined) {return res.json('KHONG HOP LE') };
   try {
-    if (token==undefined) { result = req.user._id} else {
-    var result = jwt.verify(token, 'mk')};
+    if (token==undefined) { result = req.session.passport.user} else {
+      var result = jwt.verify(token, 'mk')
+    };
+    console.log(result);
     User.findOne({
       _id:result,
     })
@@ -17,10 +19,10 @@ module.exports = function (req, res, next) {
         next(); 
       })
       .catch(err => {
-        res.json(err)
+        res.json('LOI')
       })
        
     } catch (error) {
-      res.json(error)
+      res.json('LOI CATCH')
     }
 }

@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+const checkAuth = require('../controllers/checkAuth');
 
 const movieController = require('../controllers/movieController')
 
@@ -7,7 +8,7 @@ const movieController = require('../controllers/movieController')
 router.get('/', movieController.homepage);
 
 /* GET all movies page */
-router.get('/movie', movieController.movie);
+router.get('/movie', checkAuth, movieController.movie);
 
 /* GET list of showing movies */
 router.get('/movie/showing', movieController.showingList);

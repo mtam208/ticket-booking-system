@@ -1,8 +1,9 @@
 const express = require('express');
 var router = express.Router();
-var models=require('../models/sess')
+var models = require('../models/sess');
+var checkAuth = require('../controllers/checkAuth');
 
-router.get('/:id/index', function (req, res) {
+router.get('/:id/index', checkAuth, function (req, res) {
     res.render('reservation');
 })
 

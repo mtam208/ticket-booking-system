@@ -39,4 +39,22 @@ $(document).ready(function () {
       }
     });
   });
+
+  $.ajax({
+    url: "/auth/userinfo",
+    type: "GET",
+  })
+    .then(data => {
+      if (!data||data=='KHONG HOP LE') { 
+        $('#usernamenavbar').html(`<a href="/auth" class="nav-item nav-link">
+        <i class="fa fa-user-circle fa-lg"></i>
+        <span> ĐĂNG NHẬP
+        </span>
+    </a>`)
+      } else $('#usernamenavbar').html(`<a href="/auth/logout" class="nav-item nav-link">
+      <i class="fa fa-user-circle fa-lg"></i>
+      <span> ${data}
+      </span>
+  </a>`)
+  })
 });

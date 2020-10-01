@@ -1,9 +1,9 @@
 const MovieModel = require('../models/movie')
-const SessionModel = require('../models/sess')
+const SessionModel = require('../models/sess');
 
 /* GET home page */
 exports.homepage = (req, res, next) => {
-    res.render('main')
+    res.render('main', { user: req.user });
 }
 
 /* GET all movies' page */
