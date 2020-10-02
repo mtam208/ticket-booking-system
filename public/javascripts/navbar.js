@@ -51,10 +51,12 @@ $(document).ready(function () {
         <span> ĐĂNG NHẬP
         </span>
     </a>`)
-      } else $('#usernamenavbar').html(`<a href="/auth/logout" class="nav-item nav-link">
-      <i class="fa fa-user-circle fa-lg"></i>
-      <span> ${data}
-      </span>
-  </a>`)
+      } else $('#usernamenavbar').html(`<a href="/userinfo" class="nav-item nav-link">
+                  <i class="fa fa-user-circle fa-lg"></i>
+                  <span> ${data}</span>
+              </a><a href="/auth/logout" class="nav-item nav-link">
+              <i class="fa fa-user-circle fa-lg"></i>
+              <span> LOG 5OUT</span>
+          </a>`)
   })
 });
