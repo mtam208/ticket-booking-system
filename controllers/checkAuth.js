@@ -13,7 +13,7 @@ module.exports = function (req, res, next) {
       _id:result,
     })
       .then(data => {
-        if (!data) { res.json('KHONG HOP LE') };
+        if (!data) {res.json('KHONG HOP LE') };
         if (data.username == null) { req.user = data.email }
         else {req.user = data.username};
         next(); 

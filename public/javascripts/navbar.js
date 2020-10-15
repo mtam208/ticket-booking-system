@@ -40,6 +40,8 @@ $(document).ready(function () {
     });
   });
 
+  // ADD USERNAME AND LOGOUT BUTTONS
+
   $.ajax({
     url: "/auth/userinfo",
     type: "GET",
@@ -55,8 +57,7 @@ $(document).ready(function () {
                   <i class="fa fa-user-circle fa-lg"></i>
                   <span> ${data}</span>
               </a><a href="/auth/logout" class="nav-item nav-link">
-              <i class="fa fa-user-circle fa-lg"></i>
-              <span> LOG 5OUT</span>
+              <span> Đăng xuất</span>
           </a>`)
   })
 });

@@ -23,10 +23,10 @@ const sessionSchema = new Schema({
     snack: {type: Schema.Types.ObjectId, ref: 'Cart'}
     },
     {
-        collection: 'sess'
+        collection: 'session'
     }
 );
 
-const SessionModel = mongoose.model('sess', sessionSchema)
+const SessionModel = mongoose.model('session', sessionSchema)
 
 module.exports = SessionModel

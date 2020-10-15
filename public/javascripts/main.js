@@ -105,12 +105,31 @@ $('#showDateSelection').change(()=>{
         url: '/movie/' + movieId + '/cinema/' + cinemaId + '/showDate/' + showDateId + '/showTime',
         type: 'GET'
     })
-    .then(data=>{
-        console.log(data);
-        data.forEach(showTime => {
+        .then(data => {
+            data.forEach(showTime => {
             let item = $(`<option class="val" value="${showTime}">${showTime}</option>`)
             $('#showTimeSelection').append(item)
         })
+    })
+    .catch(err=>console.log(err))
+})
+
+//PICKDATE 
+
+$('#showTimeSelection').change(() => {
+    let movieId = $('#movieSelection').val()
+    let cinema = $('#cinemaSelection').val()
+    let showDateId = $('#showDateSelection').val()
+    let cinemaId = encodeURI(cinema)
+    let timeId = $('#showTimeSelection').val();
+    console.log(cinema, ' ', showDateId, ' ', timeId);
+    $.ajax({
+        url: '/movie/' + movieId + '/cinema/' + cinemaId + '/showDate/' + showDateId + '/showTime/' + timeId,
+        type: 'GET'
+    })
+        .then(data => {
+            console.log(data);
+            window.location = data;
     })
     .catch(err=>console.log(err))
 })

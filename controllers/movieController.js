@@ -23,9 +23,7 @@ exports.movieInfo = (req, res, next) => {
 /* GET list of showing movies */
 exports.showingList = (req, res, next) => {
     let today = new Date()
-    MovieModel.find({
-        openDate: {$lte: today}
-    })
+    MovieModel.find()
     .sort({openDate: -1})
     .then(data=>{
         res.json(data);
@@ -65,7 +63,7 @@ exports.showDateList = (req, res, next) => {
         movie: req.params.movieId,
         cinema: decodeURI(req.params.cinemaId)
     })
-    .then(data=>{
+        .then(data => {
         let fullList = data.map(session => session.showDate)
         let uniqueList = Array.from(new Set(fullList))
         res.json(uniqueList)
@@ -75,16 +73,29 @@ exports.showDateList = (req, res, next) => {
 
 /* GET list of showTime which selected showDate has */
 exports.showTimeList = (req, res, next) => {
-    console.log(req.params.showDateId);
     SessionModel.find({
         movie: req.params.movieId,
         cinema: decodeURI(req.params.cinemaId),
         showDate: req.params.showDateId
     })
-    .then(data=>{
-        let fullList = data.map(session => session.showTime)
-        let uniqueList = Array.from(new Set(fullList))
-        res.json(uniqueList)
+        .then(data => {
+            let fullList = data.map(session => session.showTime);
+            let uniqueList = Array.from(new Set(fullList));
+            res.json(uniqueList);
+    })
+    .catch(err=>console.log(err))
+}
+
+exports.doneBooking = (req, res, next) => {
+    SessionModel.find({
+        movie: req.params.movieId,
+        cinema: decodeURI(req.params.cinemaId),
+        showDate: req.params.showDateId,
+        showTime: req.params.showTimeId
+    })
+        .then(data => {
+            res.json('/cart/' + data[0]._id + '/index');
+            return false;
     })
     .catch(err=>console.log(err))
 }

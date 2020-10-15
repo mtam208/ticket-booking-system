@@ -28,4 +28,7 @@ router.get('/movie/:movieId/cinema/:cinemaId/showDate', movieController.showDate
 /* GET list of showTime which selected showDate has */
 router.get('/movie/:movieId/cinema/:cinemaId/showDate/:showDateId/showTime', movieController.showTimeList);
 
+/* GET list of showTime which selected showDate has */
+router.get('/movie/:movieId/cinema/:cinemaId/showDate/:showDateId/showTime/:showTimeId', movieController.doneBooking);
+
 module.exports = router;
