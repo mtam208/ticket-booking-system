@@ -8,14 +8,13 @@ $(document).ready(function () {
         type: 'GET'
     })
           .then(data => {
-              console.log(data);
-              var seat = data.seat;
+              var seat = data[0].seat;
               var pos = [];
-              $('#movie').append(`${data.movie}`);
-              $('#cinema').append(`${data.cinema}`);
-              $('#hall').append(`${data.hall}`);
-              $('#showDate').append(`${data.showDate}`);
-              $('#showTime').append(`${data.showTime}`);
+              $('#movie').append(`${data[1].title}`);
+              $('#cinema').append(`${data[0].cinema}`);
+              $('#hall').append(`${data[0].hall}`);
+              $('#showDate').append(`${data[0].showDate}`);
+              $('#showTime').append(`${data[0].showTime}`);
             // Render seat are selected or not
                 for (let i = 0; i <= 5; i++){
                     for (let j = 0; j <= 8; j++){
@@ -23,7 +22,8 @@ $(document).ready(function () {
                     }
                 }
 
-                let count = $('#count').text();
+              let count = $('#count').text();
+              
             // Click to choose the seats
               $('.seat').click(function () {
                   let x = parseInt($(this).attr('class').split('--')[1],10);
@@ -44,7 +44,8 @@ $(document).ready(function () {
                     loaddata(count, 45000);
                     pos.push({ x: x, y: y });
                 }
-            })
+              })
+              
             // Confirm               
               $('.btn').click(function () {
                   if (pos.length == 0) { alert('CHUA CHON GHE'); return false}
@@ -55,8 +56,8 @@ $(document).ready(function () {
                     
                 })
                     .then(data => {
-                        if (data=='PICKED'){alert('GHE DA DUOC CHON')}
-                       else alert('DAT THANH CONG')
+                        if (data == 'PICKED') { alert('GHE DA DUOC CHON') }
+                        else { alert('DAT THANH CONG'); window.location = "/" }
                     })
             })
         })
