@@ -8,7 +8,6 @@ module.exports = function (req, res, next) {
     if (token==undefined) { result = req.session.passport.user} else {
       var result = jwt.verify(token, 'mk')
     };
-    console.log(result);
     User.findOne({
       _id:result,
     })

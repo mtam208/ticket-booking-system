@@ -38,7 +38,6 @@ router.post('/:id', function (req, res) {
                 res.json(data)
             })
     })
-
 })
 
 module.exports = router;

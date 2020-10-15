@@ -9,6 +9,10 @@
   src:url(../stylesheets/fonts/Alata-Regular.ttf);
   font-family:Alata;
 }
+@font-face{
+  src:url(../stylesheets/fonts/Lemonada-VariableFont_wght.ttf);
+  font-family:Lemonada;
+}
 
 /* Remove the navbar's default margin-bottom and rounded borders */ 
 .navbar {

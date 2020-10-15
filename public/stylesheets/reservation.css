@@ -35,7 +35,7 @@ ul,li{
 .main_right{
   width: 300px;
   margin-left: 30px;
-  background:rgba(94, 163, 131, 0.404);
+  background:#61a34279;
 }
 
 
@@ -182,6 +182,14 @@ p.text span {
   }
 }
 
+#movie{
+  font-family:Lemonada;
+  color: rgb(37, 8, 75);
+  font-size: 1rem;
+}
+
 .btn{
   background:rgba(255, 255, 255, 0.473);
+  margin: 0 auto;
+  display: block;
 }
